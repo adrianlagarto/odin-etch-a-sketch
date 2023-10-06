@@ -1,15 +1,14 @@
- document.addEventListener("DOMContentLoaded", function(){
-    createBoard(16);
+let color = "black";
 
-    let btnPopUp = document.querySelector('#pop-up')
-    btnPopUp.addEventListener("click", function(){
-      let size = getSizeBoard();
-      createBoard(size);
-    })
-    
-    console.log("hi");
- })
+document.addEventListener("DOMContentLoaded", function(){
+  createBoard(16);
 
+  let btnPopUp = document.querySelector('#pop-up')
+  btnPopUp.addEventListener("click", function(){
+    let size = getSizeBoard();
+    createBoard(size);
+  })
+})
 
 function createBoard(size){
   let board = document.querySelector(".board");
@@ -20,8 +19,8 @@ function createBoard(size){
   let numDivs = size * size;
 
   for(let i = 0; i < numDivs; i++){
-    let div= document.createElement("div")
-    
+    let div = document.createElement("div")
+    div.addEventListener("mouseover", colorDiv);
     board.insertAdjacentElement("beforeend", div)
   }
 }
@@ -29,7 +28,6 @@ function createBoard(size){
 function getSizeBoard() {
   let input = prompt("Change the size of the board:(100 limit)")
   let message = document.querySelector('#message');
-  console.log('hi')
 
   if(input === "") {
     return message.innerHTML = 'Please provide a number';
@@ -41,6 +39,21 @@ function getSizeBoard() {
     message.innerHTML = "Now you play!"
     return input;
   }
-
 }
-//function resetButton(){}
+
+function colorDiv(){
+  if(color === "random"){
+    this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+  }
+  else{
+    this.style.backgroundColor = 'black';
+  }
+}
+
+function setColor(colorChoice){
+  color = colorChoice;
+}
+function resetButton(){
+  let divs = document.querySelectorAll("div");
+  divs.forEach((div) => div.style.backgroundColor = "white")
+}
