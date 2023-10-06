@@ -43,3 +43,9 @@ body{
   display: grid;
   border:1px solid black;
 }
+
+.btn{
+  margin:.5rem;
+  padding:1rem;
+}
+
